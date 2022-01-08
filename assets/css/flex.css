@@ -1,0 +1,75 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.main {
+    width: 100%;
+    height: auto;
+    background-color: rgb(107, 105, 105);
+}
+
+.number {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.number .child-number {
+    width: 10%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.number .child-number.a1 {
+    background-color: green;
+}
+
+.number .child-number.a2 {
+    background-color: rgb(185, 184, 204);
+}
+
+.number .child-number.a3 {
+    background-color: rgb(128, 0, 53);
+}
+
+.number .child-number.a4 {
+    background-color: rgb(200, 26, 148);
+}
+
+.number .child-number.a5 {
+    background-color: rgb(238, 255, 7);
+}
+
+.chart {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding: 30px 0;
+    background-color: rgb(253, 253, 253);
+}
+
+.chart-items {
+    width: 8%;
+    color: white;
+    height: var(--percent);
+    background-color: rgb(246, 0, 0);
+    text-align: center;
+    animation: growth linear 0.3s;
+}
+
+@keyframes growth {
+    from {
+        height: calc(var(--percent)-50%);
+        opacity: 0;
+    }
+    to {
+        height: var(--percent);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/bem.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+
+<body>
+
+    <!-- success -->
+    <div id="toast">
+
+
+    </div>
+    <div>
+        <button onclick="ShowSuccessToast();" class="btn btn--success ">Show success toast</button>
+        <button onclick="ShowErrorToast();" class="btn btn--danger ">Show error toast</button>
+    </div>
+    <script>
+        function toast({
+            title = '',
+            message = '',
+            type = '',
+            ducation = 3000
+        }) {
+            const main = document.getElementById('toast');
+            if (main) {
+                const toast = document.createElement('div');
+                toast.classList.add('toast', `toast--${type}`);
+                const AutoRemoveID = setTimeout(() => {
+                    main.removeChild(toast);
+                }, ducation + 1030);
+
+                toast.onclick = function(b) {
+                    if (b.target.closest('.toast__close')) {
+                        main.removeChild(toast);
+                        clearTimeout(AutoRemoveID);
+                    }
+                }
+                const delay = (ducation / 1000).toFixed(2);
+                toast.style.animation = `slideInleft ease 0.3s, fadeOut linear 1s ${delay}s forwards`;
+                const icons = {
+                    success: 'fas fa-check-circle',
+                    info: 'fas fa-info-circle',
+                    warning: 'fas fa-exclamation-circle',
+                    error: 'fas fa-radiation-alt'
+                }
+                const icon = icons[type];
+                toast.innerHTML = `
+                <div class="toast__icon">
+                    <i class="${icon}"></i>
+                </div>
+                <div class="toast__body">
+                    <div class="toast__title">
+                        <h3>${title}</h3>
+                    </div>
+                    <div class="toast__msg">
+                        <p>${message}</p>
+                    </div>
+                </div>
+                <div class="toast__close">
+                    <i class="fas fa-times"></i>
+                </div>
+                `;
+                main.appendChild(toast);
+
+            }
+        }
+
+        function ShowSuccessToast() {
+            toast({
+                title: 'Success',
+                message: 'enenatis natis q perferendis enim mattis enim',
+                type: 'success',
+                ducation: 5000
+            });
+        }
+
+        function ShowErrorToast() {
+            toast({
+                title: 'Error',
+                message: 'enenatis natis q perferendis enim mattis enim',
+                type: 'error',
+                ducation: 5000
+            });
+        }
+    </script>
+</body>
+
+</html>
